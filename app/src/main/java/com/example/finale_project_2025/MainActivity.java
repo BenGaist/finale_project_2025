@@ -33,6 +33,7 @@ public class MainActivity extends AppCompatActivity {
         passwordEditText = findViewById(R.id.passwordEditText);
         loginButton = findViewById(R.id.loginButton);
 
+
         HashMap<String, String> users = new HashMap<>();
         users.put("ben", "123");
         users.put("alon", "1234");
@@ -47,6 +48,7 @@ public class MainActivity extends AppCompatActivity {
                 if (users.containsKey(username) && users.get(username).equals(password)) {
                     // Open the second activity
                     Intent intent = new Intent(MainActivity.this, MainActivity2.class);
+                    intent.putExtra("username",username); // Or use EditText.getText().toString()
                     startActivity(intent);
                 } else {
                     Toast.makeText(MainActivity.this, "Invalid login details", Toast.LENGTH_SHORT).show();
