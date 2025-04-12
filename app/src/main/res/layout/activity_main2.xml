@@ -20,75 +20,66 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
-    <!-- < Button -->
-    <Button
-        android:id="@+id/lessThanButton"
-        android:layout_width="64dp"
-        android:layout_height="64dp"
-        android:text="&lt;"
-        android:textColor="#FFFFFF"
-        android:backgroundTint="#6B4FCF"
-        android:layout_marginTop="40dp"
-        app:layout_constraintTop_toBottomOf="@id/welcomeText"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
-
     <!-- Left Number -->
-
-    <!-- = Button -->
-
-    <!-- Right Number -->
-
     <TextView
         android:id="@+id/leftTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="56dp"
-        android:layout_marginTop="40dp"
-        android:text="2"
+        android:text="80"
         android:textSize="24sp"
-        app:layout_constraintBottom_toBottomOf="@id/equalButton"
+        app:layout_constraintTop_toBottomOf="@id/welcomeText"
+        android:layout_marginTop="60dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/lessThanButton" />
+        android:layout_marginStart="32dp" />
 
-    <!-- > Button -->
-
-    <Button
-        android:id="@+id/equalButton"
-        android:layout_width="64dp"
-        android:layout_height="64dp"
-        android:layout_marginTop="36dp"
-        android:backgroundTint="#6B4FCF"
-        android:text="="
-        android:textColor="#FFFFFF"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.377"
-        app:layout_constraintStart_toEndOf="@id/leftTextView"
-        app:layout_constraintTop_toBottomOf="@id/lessThanButton" />
-
+    <!-- Right Number -->
     <TextView
         android:id="@+id/rightTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
-        android:text="5"
+        android:text="72"
         android:textSize="24sp"
-        app:layout_constraintBottom_toBottomOf="@id/equalButton"
+        app:layout_constraintTop_toTopOf="@id/leftTextView"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/equalButton"
-        app:layout_constraintTop_toBottomOf="@id/lessThanButton" />
+        android:layout_marginEnd="32dp" />
 
-    <Button
-        android:id="@+id/greaterThanButton"
-        android:layout_width="64dp"
-        android:layout_height="64dp"
-        android:text="&gt;"
-        android:textColor="#FFFFFF"
-        android:backgroundTint="#6B4FCF"
-        android:layout_marginTop="40dp"
-        app:layout_constraintTop_toBottomOf="@id/equalButton"
+    <!-- Button Group: < = > -->
+    <LinearLayout
+        android:id="@+id/buttonRow"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintTop_toBottomOf="@id/leftTextView"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="32dp">
+
+        <Button
+            android:id="@+id/lessThanButton"
+            android:layout_width="64dp"
+            android:layout_height="64dp"
+            android:text="&lt;"
+            android:textColor="#FFFFFF"
+            android:backgroundTint="#6B4FCF" />
+
+        <Button
+            android:id="@+id/equalButton"
+            android:layout_width="64dp"
+            android:layout_height="64dp"
+            android:text="="
+            android:textColor="#FFFFFF"
+            android:backgroundTint="#6B4FCF"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp" />
+
+        <Button
+            android:id="@+id/greaterThanButton"
+            android:layout_width="64dp"
+            android:layout_height="64dp"
+            android:text="&gt;"
+            android:textColor="#FFFFFF"
+            android:backgroundTint="#6B4FCF" />
+    </LinearLayout>
 
     <!-- See Score Button -->
     <Button
@@ -99,7 +90,7 @@
         android:backgroundTint="#6B4FCF"
         android:textColor="#FFFFFF"
         android:layout_marginTop="40dp"
-        app:layout_constraintTop_toBottomOf="@id/greaterThanButton"
+        app:layout_constraintTop_toBottomOf="@id/buttonRow"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
