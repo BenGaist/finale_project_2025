@@ -35,9 +35,15 @@ public class MainActivity extends AppCompatActivity {
 
 
         HashMap<String, String> users = new HashMap<>();
-        users.put("ben", "123");
-        users.put("alon", "1234");
-        users.put("shai", "12345");
+        users.put("ben", "ben");
+        users.put("alon", "alon");
+        users.put("shai", "shai");
+        users.put("ofer","ofer");
+        users.put("nitzan","nitzan");
+        users.put("karin","karin");
+        users.put("yotam","yotam");
+        users.put("kirby","kirby");
+
 
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override

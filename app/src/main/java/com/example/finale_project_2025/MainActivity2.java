@@ -25,7 +25,7 @@ public class MainActivity2 extends AppCompatActivity {
     TextView rightTextView;
     TextView welcomeText;
     Button seeScoreButton;
-
+    Button QuitButton;
     String username;
 
     @Override
@@ -42,6 +42,18 @@ public class MainActivity2 extends AppCompatActivity {
                 return insets;
             }
         });
+
+        QuitButton = findViewById(R.id.quitButton);
+
+        QuitButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity2.this, MainActivity.class);
+                startActivity(intent);
+                finish();
+            }
+        });
+
 
         currentQuestionIndex = 0;
         score = 0;
