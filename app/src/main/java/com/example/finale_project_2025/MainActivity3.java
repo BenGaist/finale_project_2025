@@ -17,7 +17,7 @@ import java.util.ArrayList;
 
 public class MainActivity3 extends AppCompatActivity {
 
-    private String username; // store the username to pass it back
+    private String username;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,7 +25,7 @@ public class MainActivity3 extends AppCompatActivity {
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_main3);
 
-        // Set window insets
+
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), new androidx.core.view.OnApplyWindowInsetsListener() {
             @Override
             public WindowInsetsCompat onApplyWindowInsets(View v, WindowInsetsCompat insets) {
@@ -35,10 +35,10 @@ public class MainActivity3 extends AppCompatActivity {
             }
         });
 
-        // Get the username passed from MainActivity2
+
         username = getIntent().getStringExtra("username");
 
-        // Set up RecyclerView with results
+
         RecyclerView recyclerView = findViewById(R.id.resultsRecyclerView);
         GameResultDatabaseHelper dbHelper = new GameResultDatabaseHelper(this);
         ArrayList<Result> results = dbHelper.getAllResults();
@@ -47,7 +47,7 @@ public class MainActivity3 extends AppCompatActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(adapter);
 
-        // Back button returns to MainActivity2 with same username
+
         Button backButton = findViewById(R.id.backButton);
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override

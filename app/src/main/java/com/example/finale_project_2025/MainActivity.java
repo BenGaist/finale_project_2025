@@ -53,7 +53,7 @@ public class MainActivity extends AppCompatActivity {
                 String password = passwordEditText.getText().toString();
 
                 if (users.containsKey(username) && users.get(username).equals(password)) {
-                    // Open the second activity
+
                     Intent intent = new Intent(MainActivity.this, MainActivity2.class);
                     intent.putExtra("username",username); // Or use EditText.getText().toString()
                     startActivity(intent);

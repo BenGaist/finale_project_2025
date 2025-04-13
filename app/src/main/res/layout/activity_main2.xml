@@ -8,7 +8,7 @@
     android:layout_height="match_parent"
     android:background="#FFF8FF">
 
-    <!-- Welcome Text -->
+
     <TextView
         android:id="@+id/welcomeText"
         android:layout_width="wrap_content"
@@ -21,7 +21,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
-    <!-- Left Number -->
+
     <TextView
         android:id="@+id/leftTextView"
         android:layout_width="wrap_content"
@@ -33,7 +33,7 @@
         app:layout_constraintStart_toStartOf="parent"
         android:layout_marginStart="32dp" />
 
-    <!-- Right Number -->
+
     <TextView
         android:id="@+id/rightTextView"
         android:layout_width="wrap_content"
@@ -44,7 +44,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginEnd="32dp" />
 
-    <!-- Button Group: < = > -->
+
     <LinearLayout
         android:id="@+id/buttonRow"
         android:layout_width="wrap_content"
@@ -82,7 +82,7 @@
             android:backgroundTint="#6B4FCF" />
     </LinearLayout>
 
-    <!-- See Score Button -->
+
     <Button
         android:id="@+id/seeScoreButton"
         android:layout_width="wrap_content"

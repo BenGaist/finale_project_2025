@@ -12,7 +12,7 @@ import java.util.ArrayList;
 
 public class GameResultDatabaseHelper extends SQLiteOpenHelper {
 
-    // DB and Table constants
+
     public static final String TABLE_NAME = "results";
     public static final String COLUMN_ID = "_id";
     public static final String COLUMN_USERNAME = "username";
@@ -20,7 +20,7 @@ public class GameResultDatabaseHelper extends SQLiteOpenHelper {
     public static final String COLUMN_MOTIVATION = "motivation";
 
     public GameResultDatabaseHelper(Context context) {
-        // We use null for factory and 1 for version because it’s required
+
         super(context, "results.db", null, 1);
     }
 

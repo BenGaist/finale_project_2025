@@ -8,7 +8,7 @@
     android:background="@android:color/white"
     android:elevation="2dp">
 
-    <!-- Username -->
+
     <TextView
         android:id="@+id/usernameTextView"
         android:layout_width="0dp"
@@ -22,7 +22,6 @@
         app:layout_constraintBottom_toTopOf="@id/motivationTextView"
         app:layout_constraintHorizontal_bias="0.0" />
 
-    <!-- Motivational Sentence -->
     <TextView
         android:id="@+id/motivationTextView"
         android:layout_width="0dp"
@@ -34,7 +33,7 @@
         app:layout_constraintEnd_toEndOf="@id/usernameTextView"
         app:layout_constraintBottom_toBottomOf="parent" />
 
-    <!-- Score Percentage -->
+
     <TextView
         android:id="@+id/scoreTextView"
         android:layout_width="wrap_content"

@@ -94,7 +94,7 @@ public class MainActivity2 extends AppCompatActivity {
         seeScoreButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                goToScoreScreen(); // Just goes to MainActivity3 without saving the result
+                goToScoreScreen();
             }
         });
 
@@ -136,12 +136,12 @@ public class MainActivity2 extends AppCompatActivity {
         if (currentQuestionIndex < questionsList.size()) {
             showQuestion();
         } else {
-            showGameOverDialog(); // Will save score and go to MainActivity3
+            showGameOverDialog();
         }
     }
 
     private void showGameOverDialog() {
-        // Here we save the result and go to the score screen
+
         String[] motivations = {
                 "Great job!", "Keep it up!", "You’re getting smarter!", "You rock!", "Nice brain power!"
         };
@@ -155,7 +155,7 @@ public class MainActivity2 extends AppCompatActivity {
         Intent intent = new Intent(MainActivity2.this, MainActivity3.class);
         intent.putExtra("username",username);
         startActivity(intent);
-        finish(); // End this screen so user can’t go back to it
+        finish();
     }
 
     private void goToScoreScreen() {
