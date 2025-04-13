@@ -43,6 +43,7 @@ public class MainActivity extends AppCompatActivity {
         users.put("karin","karin");
         users.put("yotam","yotam");
         users.put("kirby","kirby");
+        users.put("yael","yael");
 
 
         loginButton.setOnClickListener(new View.OnClickListener() {
