@@ -55,7 +55,7 @@ public class MainActivity extends AppCompatActivity {
                 if (users.containsKey(username) && users.get(username).equals(password)) {
 
                     Intent intent = new Intent(MainActivity.this, MainActivity2.class);
-                    intent.putExtra("username",username); // Or use EditText.getText().toString()
+                    intent.putExtra("username",username);
                     startActivity(intent);
                 } else {
                     Toast.makeText(MainActivity.this, "Invalid login details", Toast.LENGTH_SHORT).show();

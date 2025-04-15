@@ -45,24 +45,24 @@ public class MainActivity2 extends AppCompatActivity {
             }
         });
 
-        // Retrieve UI elements
+
         leftTextView = findViewById(R.id.leftTextView);
         rightTextView = findViewById(R.id.rightTextView);
         welcomeText = findViewById(R.id.welcomeText);
         seeScoreButton = findViewById(R.id.seeScoreButton);
         quitButton = findViewById(R.id.quitButton);
 
-        // Username from intent
+
         username = getIntent().getStringExtra("username");
         welcomeText.setText("Hello " + username + "!");
 
-        // Game init
+
         score = 0;
         questionCount = 0;
         currentQuestion = populateQuestion();
         showQuestion(currentQuestion);
 
-        // Answer buttons
+
         Button lessThan = findViewById(R.id.lessThanButton);
         Button equal = findViewById(R.id.equalButton);
         Button greaterThan = findViewById(R.id.greaterThanButton);
@@ -88,7 +88,7 @@ public class MainActivity2 extends AppCompatActivity {
             }
         });
 
-        // Quit back to MainActivity
+
         quitButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -98,17 +98,17 @@ public class MainActivity2 extends AppCompatActivity {
             }
         });
 
-        // See score without saving
+
         seeScoreButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                showGameOverDialog();
+                showConfirmationDialog();
             }
         });
     }
 
     private Question populateQuestion() {
-        //ArrayList<Question> list = new ArrayList<>();
+
         Random rand = new Random();
 
 
@@ -149,12 +149,12 @@ public class MainActivity2 extends AppCompatActivity {
         String motivation = motivations[new Random().nextInt(motivations.length)];
         int percentage = (score * 100) / questionCount;
 
-        // Save result using Room (Note)
+
         NoteDatabase db = NoteDatabase.getInstance(this);
         Note note = new Note(username, percentage, motivation);
-        db.noteDao().insert(note); // ✅ correct method & class
+        db.noteDao().insert(note);
 
-        // Go to result screen
+
         Intent intent = new Intent(MainActivity2.this, MainActivity3.class);
         intent.putExtra("username", username);
         startActivity(intent);
@@ -166,5 +166,19 @@ public class MainActivity2 extends AppCompatActivity {
         intent.putExtra("username", username);
         startActivity(intent);
         finish();
+    }
+
+    private void showConfirmationDialog() {
+        new androidx.appcompat.app.AlertDialog.Builder(this)
+                .setTitle("Finish Game?")
+                .setMessage("Are you sure you want to end the game and see your score?")
+                .setPositiveButton("Yes", new android.content.DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(android.content.DialogInterface dialog, int which) {
+                        showGameOverDialog();
+                    }
+                })
+                .setNegativeButton("No", null)
+                .show();
     }
 }
