@@ -20,8 +20,9 @@ import java.util.Random;
 public class MainActivity2 extends AppCompatActivity {
 
     ArrayList<Question> questionsList;
-    int currentQuestionIndex;
     int score;
+    int questionCount;
+    Question currentQuestion;
     TextView leftTextView;
     TextView rightTextView;
     TextView welcomeText;
@@ -56,10 +57,10 @@ public class MainActivity2 extends AppCompatActivity {
         welcomeText.setText("Hello " + username + "!");
 
         // Game init
-        currentQuestionIndex = 0;
         score = 0;
-        questionsList = populateQuestions(10);
-        showQuestion();
+        questionCount = 0;
+        currentQuestion = populateQuestion();
+        showQuestion(currentQuestion);
 
         // Answer buttons
         Button lessThan = findViewById(R.id.lessThanButton);
@@ -101,47 +102,43 @@ public class MainActivity2 extends AppCompatActivity {
         seeScoreButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                goToScoreScreen();
+                showGameOverDialog();
             }
         });
     }
 
-    private ArrayList<Question> populateQuestions(int count) {
-        ArrayList<Question> list = new ArrayList<>();
+    private Question populateQuestion() {
+        //ArrayList<Question> list = new ArrayList<>();
         Random rand = new Random();
 
-        for (int i = 0; i < count; i++) {
-            int left = rand.nextInt(100);
-            int right = rand.nextInt(100);
-            list.add(new Question(left, right));
-        }
 
-        return list;
+        int left = rand.nextInt(100);
+        int right = rand.nextInt(100);
+
+        return new Question(left, right);
     }
 
-    private void showQuestion() {
-        Question current = questionsList.get(currentQuestionIndex);
-        leftTextView.setText(String.valueOf(current.getLeft()));
-        rightTextView.setText(String.valueOf(current.getRight()));
+    private void showQuestion(Question other) {
+
+        leftTextView.setText(String.valueOf(other.getLeft()));
+        rightTextView.setText(String.valueOf(other.getRight()));
     }
 
-    private void checkAnswer(char selected) {
-        Question current = questionsList.get(currentQuestionIndex);
+    private void checkAnswer(char selected)
+    {
 
-        if (current.getCorrectAnswer() == selected) {
+        if (currentQuestion.getCorrectAnswer() == selected) {
             score++;
             Toast.makeText(this, "Correct!", Toast.LENGTH_SHORT).show();
         } else {
-            Toast.makeText(this, "Wrong! Correct answer was " + current.getCorrectAnswer(), Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Wrong! Correct answer was " + currentQuestion.getCorrectAnswer(), Toast.LENGTH_SHORT).show();
         }
 
-        currentQuestionIndex++;
+        questionCount++;
 
-        if (currentQuestionIndex < questionsList.size()) {
-            showQuestion();
-        } else {
-            showGameOverDialog(); // save to Room and go to results
-        }
+        currentQuestion = populateQuestion();
+        showQuestion(currentQuestion);
+
     }
 
     private void showGameOverDialog() {
@@ -150,7 +147,7 @@ public class MainActivity2 extends AppCompatActivity {
         };
 
         String motivation = motivations[new Random().nextInt(motivations.length)];
-        int percentage = (score * 100) / questionsList.size();
+        int percentage = (score * 100) / questionCount;
 
         // Save result using Room (Note)
         NoteDatabase db = NoteDatabase.getInstance(this);
