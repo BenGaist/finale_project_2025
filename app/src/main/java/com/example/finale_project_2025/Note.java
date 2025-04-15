@@ -37,6 +37,11 @@ public class Note {
         return sentence;
     }
 
+    public void setId(int id) {
+        this.id = id;
+    }
+
+
     public void setUsername(String username) {
         this.username = username;
     }
@@ -48,6 +53,8 @@ public class Note {
     public void setSentence(String sentence) {
         this.sentence = sentence;
     }
+
+
 }
 
 
