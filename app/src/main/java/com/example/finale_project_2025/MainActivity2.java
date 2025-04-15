@@ -14,10 +14,11 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
-import android.view.View;
 
 public class MainActivity2 extends AppCompatActivity {
+
     ArrayList<Question> questionsList;
     int currentQuestionIndex;
     int score;
@@ -25,7 +26,7 @@ public class MainActivity2 extends AppCompatActivity {
     TextView rightTextView;
     TextView welcomeText;
     Button seeScoreButton;
-    Button QuitButton;
+    Button quitButton;
     String username;
 
     @Override
@@ -43,29 +44,24 @@ public class MainActivity2 extends AppCompatActivity {
             }
         });
 
-        QuitButton = findViewById(R.id.quitButton);
-
-        QuitButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(MainActivity2.this, MainActivity.class);
-                startActivity(intent);
-                finish();
-            }
-        });
-
-
-        currentQuestionIndex = 0;
-        score = 0;
-
+        // Retrieve UI elements
         leftTextView = findViewById(R.id.leftTextView);
         rightTextView = findViewById(R.id.rightTextView);
         welcomeText = findViewById(R.id.welcomeText);
         seeScoreButton = findViewById(R.id.seeScoreButton);
+        quitButton = findViewById(R.id.quitButton);
 
+        // Username from intent
         username = getIntent().getStringExtra("username");
         welcomeText.setText("Hello " + username + "!");
 
+        // Game init
+        currentQuestionIndex = 0;
+        score = 0;
+        questionsList = populateQuestions(10);
+        showQuestion();
+
+        // Answer buttons
         Button lessThan = findViewById(R.id.lessThanButton);
         Button equal = findViewById(R.id.equalButton);
         Button greaterThan = findViewById(R.id.greaterThanButton);
@@ -91,15 +87,23 @@ public class MainActivity2 extends AppCompatActivity {
             }
         });
 
+        // Quit back to MainActivity
+        quitButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity2.this, MainActivity.class);
+                startActivity(intent);
+                finish();
+            }
+        });
+
+        // See score without saving
         seeScoreButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 goToScoreScreen();
             }
         });
-
-        questionsList = populateQuestions(10);
-        showQuestion();
     }
 
     private ArrayList<Question> populateQuestions(int count) {
@@ -136,12 +140,11 @@ public class MainActivity2 extends AppCompatActivity {
         if (currentQuestionIndex < questionsList.size()) {
             showQuestion();
         } else {
-            showGameOverDialog();
+            showGameOverDialog(); // save to Room and go to results
         }
     }
 
     private void showGameOverDialog() {
-
         String[] motivations = {
                 "Great job!", "Keep it up!", "You’re getting smarter!", "You rock!", "Nice brain power!"
         };
@@ -149,18 +152,21 @@ public class MainActivity2 extends AppCompatActivity {
         String motivation = motivations[new Random().nextInt(motivations.length)];
         int percentage = (score * 100) / questionsList.size();
 
-        GameResultDatabaseHelper db = new GameResultDatabaseHelper(this);
-        db.insertResult(username, percentage, motivation);
+        // Save result using Room (Note)
+        NoteDatabase db = NoteDatabase.getInstance(this);
+        Note note = new Note(username, percentage, motivation);
+        db.noteDao().insert(note); // ✅ correct method & class
 
+        // Go to result screen
         Intent intent = new Intent(MainActivity2.this, MainActivity3.class);
-        intent.putExtra("username",username);
+        intent.putExtra("username", username);
         startActivity(intent);
         finish();
     }
 
     private void goToScoreScreen() {
         Intent intent = new Intent(MainActivity2.this, MainActivity3.class);
-        intent.putExtra("username",username);
+        intent.putExtra("username", username);
         startActivity(intent);
         finish();
     }
